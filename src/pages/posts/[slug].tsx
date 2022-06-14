@@ -5,9 +5,9 @@ import {
   InferGetStaticPropsType,
 } from "next";
 import { ParsedUrlQuery } from "querystring";
-import client from "../../utils/sanityClient";
-import { postBodyQuery, postPreviewQuery, PostType } from "../../queries";
-import Post from "../../components/Post";
+import client from "utils/sanityClient";
+import { postBodyQuery, postPreviewQuery, PostType } from "queries";
+import Post from "components/Post";
 import Link from "next/link";
 
 interface StaticPathType extends ParsedUrlQuery {

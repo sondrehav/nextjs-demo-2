@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    formats: ["image/webp"],
+    loader: "custom",
     domains: ["cdn.sanity.io"],
   },
   webpack(config) {

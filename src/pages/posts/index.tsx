@@ -3,8 +3,7 @@ import client from "utils/sanityClient";
 import PostPreview from "components/PostPreview";
 import { postPreviewQuery, PostPreviewType } from "queries";
 import Link from "next/link";
-import { ComponentProps, HTMLProps, useState } from "react";
-import SearchPost from "../../components/SearchPosts";
+import SearchPost from "components/SearchPosts";
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext

@@ -3,13 +3,15 @@ import { PortableTextBlock } from "@portabletext/types";
 export type Maybe<T> = T | null;
 
 export const authorPreviewQuery = `
-  "profileImage": image.asset->url,
+  "profileImage": image,
   name
 `;
 
 export type AuthorPreviewType = {
   name: Maybe<string>;
-  profileImage: Maybe<string>;
+  profileImage: Maybe<{
+    _ref: string;
+  }>;
 };
 
 export const postPreviewQuery = ` 
@@ -17,7 +19,7 @@ export const postPreviewQuery = `
   title, 
   summary,
   ...slug { "slug": current }, 
-  "imageUrl": mainImage.asset->url,
+  "imageUrl": mainImage,
   author->{
     ${authorPreviewQuery}
   }
@@ -28,7 +30,9 @@ export type PostPreviewType = {
   title: Maybe<string>;
   summary: Maybe<string>;
   slug: Maybe<string>;
-  imageUrl: Maybe<string>;
+  imageUrl: Maybe<{
+    _ref: string;
+  }>;
   author: Maybe<AuthorPreviewType>;
   profileImage: Maybe<string>;
   name: Maybe<string>;
@@ -36,8 +40,7 @@ export type PostPreviewType = {
 
 export const postBodyQuery = `
   body []{
-    ...,
-    "imageUrl": asset->url
+    ...
   }
 `;
 

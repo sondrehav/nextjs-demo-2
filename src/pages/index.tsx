@@ -1,8 +1,8 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import client from "../utils/sanityClient";
+import client from "utils/sanityClient";
 import PostPreview from "components/PostPreview";
-import { postPreviewQuery, PostPreviewType } from "../queries";
-import SearchPost from "../components/SearchPosts";
+import { postPreviewQuery, PostPreviewType } from "queries";
+import SearchPost from "components/SearchPosts";
 import { useState } from "react";
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {

@@ -2,12 +2,16 @@ import Image from "next/image";
 import format from "date-fns/format";
 import { AuthorPreviewType, PostPreviewType } from "queries";
 import Link from "next/link";
+import { useNextSanityImage } from "next-sanity-image";
+import sanityClient from "utils/sanityClient";
 
 const AuthorPreview = ({
   profileImage,
   name,
   publishedAt,
 }: AuthorPreviewType & { publishedAt: string }) => {
+  const imageProps = useNextSanityImage(sanityClient, profileImage);
+
   return (
     <div className={"flex items-center space-x-4"}>
       <div
@@ -16,10 +20,10 @@ const AuthorPreview = ({
         }
       >
         <Image
-          loader={() => profileImage}
-          src={name}
+          {...imageProps}
           layout={"fill"}
           className={"object-cover"}
+          sizes={"40px"}
         />
       </div>
       <div className={"flex-grow-1 flex flex-col space-y-1"}>
@@ -46,14 +50,16 @@ const PostPreview = ({
   publishedAt,
   author,
 }: PostPreviewType) => {
+  const imageProps = useNextSanityImage(sanityClient, imageUrl);
+
   return (
     <div key={slug} className={"border border-gray-200 rounded-xl"}>
       <div className={"h-48 w-full  rounded-xl overflow-hidden relative"}>
         <Image
-          loader={() => imageUrl}
-          src={imageUrl}
+          {...imageProps}
           layout={"fill"}
           className={"object-cover"}
+          sizes={"(max-width: 640px) 100vw, 33vw"}
         />
       </div>
       <section className={"p-4 flex flex-col space-y-4"}>

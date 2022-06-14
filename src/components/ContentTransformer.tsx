@@ -4,20 +4,29 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula as theme } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import Image from "next/image";
 import Link from "next/link";
+import { useNextSanityImage } from "next-sanity-image";
+import sanityClient from "utils/sanityClient";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   types: {
-    image: ({ value }) => (
-      <div className={"h-96 w-full rounded-xl overflow-hidden relative"}>
-        <Image
-          loader={() => value.imageUrl}
-          src={value.imageUrl}
-          alt={value.imageUrl}
-          layout={"fill"}
-          className={"object-cover"}
-        />
-      </div>
-    ),
+    image: ({ value }) => {
+      const imageProps = useNextSanityImage(
+        sanityClient,
+        value.asset as SanityImageSource
+      );
+      return (
+        <div className={"h-96 w-full rounded-xl overflow-hidden relative"}>
+          <Image
+            {...imageProps}
+            sizes={"100vw"}
+            alt={value.imageUrl}
+            layout={"fill"}
+            className={"object-cover"}
+          />
+        </div>
+      );
+    },
     code: ({ value: { code, language } }) => (
       <SyntaxHighlighter
         showLineNumbers
