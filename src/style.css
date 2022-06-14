@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    #__next {
+        @apply relative min-h-full flex flex-col flex-grow text-gray-900;
+    }
+
+    h1 { @apply text-3xl my-8; }
+    h2 { @apply text-2xl my-6; }
+    h3 { @apply text-xl my-4; }
+    h4 { @apply text-lg my-3; }
+    h5 { @apply text-base my-2 font-bold; }
+    h6 { @apply text-sm my-2 font-bold; }
+    p { @apply text-base my-3; }
+    label { @apply font-bold text-sm my-2; }
+}
+
+@font-face {
+    font-family: "Nunito";
+    font-style: normal;
+    src: local(''), url("../public/fonts/Nunito-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Nunito";
+    font-style: italic;
+    src: local(''), url("../public/fonts/Nunito-Italic-VariableFont_wght.ttf") format("truetype");
+}
