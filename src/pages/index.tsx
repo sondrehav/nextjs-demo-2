@@ -20,7 +20,7 @@ export default function HomePage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   return (
-    <main className={"container mx-auto"}>
+    <main className={"container mx-auto pt-4"}>
       <h1>Hello, World!</h1>
       <p>
         Dette er en side for å demonstrere NextJs. Den er bygget med NextJs,

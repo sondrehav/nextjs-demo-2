@@ -1,3 +1,5 @@
+import { PortableTextBlock } from "@portabletext/types";
+
 export type Maybe<T> = T | null;
 
 export const authorPreviewQuery = `
@@ -31,3 +33,12 @@ export type PostPreviewType = {
   profileImage: Maybe<string>;
   name: Maybe<string>;
 };
+
+export const postBodyQuery = `
+  body []{
+    ...,
+    "imageUrl": asset->url
+  }
+`;
+
+export type PostType = PostPreviewType & { body: PortableTextBlock };

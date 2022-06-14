@@ -28,7 +28,7 @@ const AuthorPreview = ({
             Av <b>{name}</b>
           </i>
         </span>
-        <span className={"text-sm text-gray-400"}>
+        <span className={"text-xs text-gray-400"}>
           <i>
             Publisert <b>{format(new Date(publishedAt), "dd/M-yy")}</b>
           </i>
@@ -57,16 +57,16 @@ const PostPreview = ({
         />
       </div>
       <section className={"p-4 flex flex-col space-y-4"}>
-        <h3 className={"my-1"}>{title}</h3>
+        <h3 className={"my-1 font-semibold"}>{title}</h3>
         <hr />
         <AuthorPreview {...author} publishedAt={publishedAt} />
         <hr />
         <p>{summary}</p>
         <hr />
-        <Link href={`/post/${slug}`}>
+        <Link href={`/posts/${slug}`}>
           <a
             className={
-              "self-end py-2 px-4 rounded-full bg-blue-600 text-white text-sm font-semibold transition-all hover:bg-blue-500"
+              "self-end py-3 px-5 rounded-full bg-blue-600 text-white text-sm font-semibold transition-all hover:bg-blue-500"
             }
           >
             Åpne
