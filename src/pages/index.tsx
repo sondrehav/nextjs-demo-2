@@ -39,7 +39,7 @@ export default function HomePage(
   };
 
   return (
-    <main className={"container mx-auto pt-4"}>
+    <main className={"container mx-auto pt-4 px-2"}>
       <h1>Hello, World!</h1>
       <p>
         Dette er en side for å demonstrere NextJs. Den er bygget med NextJs,
@@ -58,7 +58,7 @@ export default function HomePage(
       />
       <hr className={"my-8"} />
 
-      <ul className={"grid grid-cols-3 gap-5"}>
+      <ul className={"grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-5"}>
         {posts.length > 0 ? (
           posts.map((post) => <PostPreview key={post.slug} {...post} />)
         ) : (

@@ -29,7 +29,7 @@ export default function SearchPostPage(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   return (
-    <main className={"container mx-auto pt-4"}>
+    <main className={"container mx-auto pt-4 px-2"}>
       <Link href={`/`}>
         <a
           className={
@@ -44,13 +44,11 @@ export default function SearchPostPage(
       <hr className={"mt-8"} />
       <h2>Resultat</h2>
       {props.result.length > 0 ? (
-        <>
-          <ul className={"grid grid-cols-3 gap-5"}>
-            {props.result.map((post) => (
-              <PostPreview key={post.slug} {...post} />
-            ))}
-          </ul>
-        </>
+        <ul className={"grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-5"}>
+          {props.result.map((post) => (
+            <PostPreview key={post.slug} {...post} />
+          ))}
+        </ul>
       ) : (
         <span className={"text-sm my-10 font-semibold"}>
           <i>Fant ingen resultater...</i>
