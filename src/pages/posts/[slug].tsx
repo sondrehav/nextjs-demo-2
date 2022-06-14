@@ -2,17 +2,11 @@ import {
   GetStaticPathsContext,
   GetStaticPathsResult,
   GetStaticPropsContext,
-  GetStaticPropsResult,
   InferGetStaticPropsType,
 } from "next";
 import { ParsedUrlQuery } from "querystring";
 import client from "../../utils/sanityClient";
-import {
-  postBodyQuery,
-  postPreviewQuery,
-  PostPreviewType,
-  PostType,
-} from "../../queries";
+import { postBodyQuery, postPreviewQuery, PostType } from "../../queries";
 import Post from "../../components/Post";
 import Link from "next/link";
 
@@ -27,7 +21,7 @@ export const getStaticPaths = async (
   );
 
   return {
-    paths: posts.map(({ slug }) => ({ params: { slug: "123" } })),
+    paths: posts.map(({ slug }) => ({ params: { slug } })),
     fallback: "blocking",
   };
 };
@@ -45,7 +39,7 @@ export const getStaticProps = async (
   };
 };
 
-export default function ({
+export default function PostPage({
   post,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (

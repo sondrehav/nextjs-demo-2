@@ -1,8 +1,10 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import client from "../../utils/sanityClient";
-import PostPreview from "../../components/PostPreview";
-import { postPreviewQuery, PostPreviewType } from "../../queries";
+import client from "utils/sanityClient";
+import PostPreview from "components/PostPreview";
+import { postPreviewQuery, PostPreviewType } from "queries";
 import Link from "next/link";
+import { ComponentProps, HTMLProps, useState } from "react";
+import SearchPost from "../../components/SearchPosts";
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
@@ -23,34 +25,7 @@ export const getServerSideProps = async (
   };
 };
 
-const SearchInput = () => {
-  return (
-    <form
-      className={
-        "border-gray-300 rounded-xl border p-8 w-96 flex flex-col space-y-4 items-start"
-      }
-    >
-      <h3>Søk etter artikler</h3>
-      <label htmlFor={"input-field"}>Søketekst</label>
-      <input
-        type={"text"}
-        name={"search"}
-        id={"input-field"}
-        className={"rounded-lg border border-gray-300 p-4 w-full"}
-      />
-      <button
-        type="submit"
-        className={
-          "py-3 px-5 rounded-full bg-blue-600 text-white text-sm font-semibold transition-all hover:bg-blue-500"
-        }
-      >
-        Søk
-      </button>
-    </form>
-  );
-};
-
-export default function (
+export default function SearchPostPage(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   return (
@@ -64,14 +39,23 @@ export default function (
           Tilbake
         </a>
       </Link>
-      <h1>Søkeresultat</h1>
-      <SearchInput />
+      <h1>Søk etter artikler</h1>
+      <SearchPost initialValue={props.searchString} />
+      <hr className={"mt-8"} />
       <h2>Resultat</h2>
-      <ul className={"grid grid-cols-3 gap-5"}>
-        {props.result.map((post) => (
-          <PostPreview key={post.slug} {...post} />
-        ))}
-      </ul>
+      {props.result.length > 0 ? (
+        <>
+          <ul className={"grid grid-cols-3 gap-5"}>
+            {props.result.map((post) => (
+              <PostPreview key={post.slug} {...post} />
+            ))}
+          </ul>
+        </>
+      ) : (
+        <span className={"text-sm my-10 font-semibold"}>
+          <i>Fant ingen resultater...</i>
+        </span>
+      )}
     </main>
   );
 }

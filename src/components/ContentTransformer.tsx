@@ -75,7 +75,6 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
 };
 
 const ContentTransformer = ({ body }: { body: any }) => {
-  console.log("body", JSON.stringify(body));
   return (
     <>
       <PortableText value={body} components={myPortableTextComponents} />
