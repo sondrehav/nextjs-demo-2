@@ -28,7 +28,7 @@ export default function SearchPostPage(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   return (
-    <main className={"container mx-auto pt-4 px-2"}>
+    <main className={"container mx-auto py-4 px-2"}>
       <Link href={`/`}>
         <a
           className={

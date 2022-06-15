@@ -16,12 +16,16 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
         value.asset as SanityImageSource
       );
       return (
-        <div className={"h-96 w-full rounded-xl overflow-hidden relative"}>
+        <div
+          className={
+            "mx-auto w-full lg:w-1/2 xl:w-1/3 rounded-xl overflow-hidden relative"
+          }
+        >
           <Image
             {...imageProps}
-            sizes={"100vw"}
+            sizes={"(max-width: 1024px) 100vw, 600px"}
             alt={value.imageUrl}
-            layout={"fill"}
+            layout={"responsive"}
             className={"object-cover"}
           />
         </div>
@@ -49,6 +53,7 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
       </blockquote>
     ),
   },
+
   list: {
     // Ex. 1: customizing common list types
     bullet: ({ children }) => <ul className={"ml-6 list-disc"}>{children}</ul>,
@@ -57,6 +62,9 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
     ),
   },
   marks: {
+    code: ({ children }) => (
+      <code className="text-red-900 rounded bg-gray-100">{children}</code>
+    ),
     link: ({ children, value }) => {
       const rel = !value.href.startsWith("/")
         ? "noreferrer noopener"

@@ -26,7 +26,7 @@ const Author = ({
           sizes={"48px"}
         />
       </div>
-      <div className={"flex-grow-1 flex flex-col space-y-1"}>
+      <div className={"flex-grow flex flex-col space-y-1"}>
         <span>
           <i>
             Av <b>{name}</b>

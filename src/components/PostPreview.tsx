@@ -26,7 +26,7 @@ const AuthorPreview = ({
           sizes={"40px"}
         />
       </div>
-      <div className={"flex-grow-1 flex flex-col space-y-1"}>
+      <div className={"flex-grow flex flex-col space-y-1"}>
         <span className={"text-sm"}>
           <i>
             Av <b>{name}</b>
@@ -53,8 +53,15 @@ const PostPreview = ({
   const imageProps = useNextSanityImage(sanityClient, imageUrl);
 
   return (
-    <div key={slug} className={"border border-gray-200 rounded-xl"}>
-      <div className={"h-48 w-full  rounded-xl overflow-hidden relative"}>
+    <div
+      key={slug}
+      className={
+        "border border-gray-200 rounded-xl h-full relative flex flex-col"
+      }
+    >
+      <div
+        className={"h-48 xl:h-96 w-full  rounded-xl overflow-hidden relative"}
+      >
         <Image
           {...imageProps}
           layout={"fill"}
@@ -62,12 +69,14 @@ const PostPreview = ({
           sizes={"(max-width: 640px) 100vw, 33vw"}
         />
       </div>
-      <section className={"p-4 flex flex-col space-y-4"}>
-        <h3 className={"my-1 font-semibold"}>{title}</h3>
+      <section className={"p-4 flex flex-col space-y-4 flex-grow"}>
+        <h3 className={"my-1 font-semibold truncate h-24"} title={title}>
+          {title}
+        </h3>
         <hr />
         <AuthorPreview {...author} publishedAt={publishedAt} />
         <hr />
-        <p>{summary}</p>
+        <p className={"overflow-hidden flex-grow h-full"}>{summary}</p>
         <hr />
         <Link href={`/posts/${slug}`}>
           <a

@@ -39,7 +39,7 @@ export default function HomePage(
   };
 
   return (
-    <main className={"container mx-auto pt-4 px-2"}>
+    <main className={"container mx-auto py-4 px-2"}>
       <h1>Hello, World!</h1>
       <p>
         Dette er en side for å demonstrere NextJs. Den er bygget med NextJs,
