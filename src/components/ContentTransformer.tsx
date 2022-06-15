@@ -66,26 +66,21 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
       <code className="text-red-900 rounded bg-gray-100">{children}</code>
     ),
     link: ({ children, value }) => {
-      const rel = !value.href.startsWith("/")
-        ? "noreferrer noopener"
-        : undefined;
-      if (!rel) {
-        return (
-          <Link href={value.href}>
-            <a className={"underline font-semibold text-blue-700"}>
-              {children}
-            </a>
-          </Link>
-        );
-      }
       return (
         <a
           href={value.href}
-          rel={rel}
+          rel={"noreferrer noopener"}
           className={"underline font-semibold text-blue-700"}
         >
           {children}
         </a>
+      );
+    },
+    internalLink: ({ children, value }) => {
+      return (
+        <Link href={`/posts/${value.slug}`}>
+          <a className={"underline font-semibold text-blue-700"}>{children}</a>
+        </Link>
       );
     },
   },

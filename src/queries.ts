@@ -39,8 +39,15 @@ export type PostPreviewType = {
 };
 
 export const postBodyQuery = `
-  body []{
-    ...
+  body[] {
+    ...,
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        _key,
+        "slug": @.reference->slug.current
+      }
+    }
   }
 `;
 
