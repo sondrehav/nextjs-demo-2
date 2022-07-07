@@ -22,21 +22,6 @@ export default function HomePage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const [posts, setPosts] = useState(props.posts);
-  const [isSearching, setIsSearcing] = useState(false);
-
-  const onSearch = async (search: string) => {
-    try {
-      setIsSearcing(true);
-      const posts = await client.fetch<PostPreviewType[]>(`
-        *[_type == "post" && summary match "*${search}*"] { ${postPreviewQuery} }
-      `);
-      setPosts(posts);
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setIsSearcing(false);
-    }
-  };
 
   return (
     <main className={"container mx-auto py-4 px-2"}>
@@ -49,12 +34,9 @@ export default function HomePage(
 
       <h3>Søk etter artikler</h3>
       <SearchPost
-        onSubmit={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          onSearch(e.target[0].value);
+        onSearchResults={(e) => {
+          setPosts(e);
         }}
-        disabled={isSearching}
       />
       <hr className={"my-8"} />
 

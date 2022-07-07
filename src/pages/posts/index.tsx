@@ -4,6 +4,7 @@ import PostPreview from "components/PostPreview";
 import { postPreviewQuery, PostPreviewType } from "queries";
 import Link from "next/link";
 import SearchPost from "components/SearchPosts";
+import { useState } from "react";
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
@@ -27,6 +28,8 @@ export const getServerSideProps = async (
 export default function SearchPostPage(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
+  const [posts, setPosts] = useState(props.result);
+
   return (
     <main className={"container mx-auto py-4 px-2"}>
       <Link href={`/`}>
@@ -39,12 +42,15 @@ export default function SearchPostPage(
         </a>
       </Link>
       <h1>Søk etter artikler</h1>
-      <SearchPost initialValue={props.searchString} />
+      <SearchPost
+        initialValue={props.searchString}
+        onSearchResults={setPosts}
+      />
       <hr className={"mt-8"} />
       <h2>Resultat</h2>
-      {props.result.length > 0 ? (
+      {posts.length > 0 ? (
         <ul className={"grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-5"}>
-          {props.result.map((post) => (
+          {posts.map((post) => (
             <PostPreview key={post.slug} {...post} />
           ))}
         </ul>
