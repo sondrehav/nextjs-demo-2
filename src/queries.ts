@@ -1,6 +1,6 @@
 import { PortableTextBlock } from "@portabletext/types";
 
-export type Maybe<T> = T | null;
+export type Maybe<T> = null | T;
 
 export const authorPreviewQuery = `
   "profileImage": image,
@@ -52,3 +52,18 @@ export const postBodyQuery = `
 `;
 
 export type PostType = PostPreviewType & { body: PortableTextBlock };
+
+export const colorSchemaQuery = `{
+  "primaryColor": primaryColor.hex,
+  "secondaryColor": secondaryColor.hex,
+  "accentColor": accentColor.hex,
+  "foregroundColor": foregroundColor.hex,
+  "backgroundColor": backgroundColor.hex
+}`;
+export type ColorSchemaType = {
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+  foregroundColor: string;
+  backgroundColor: string;
+};

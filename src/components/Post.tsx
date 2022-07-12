@@ -1,9 +1,9 @@
-import { AuthorPreviewType, PostType } from "queries";
+import { AuthorPreviewType, Maybe, PostType } from "queries";
 import Image from "next/image";
 import format from "date-fns/format";
 import ContentTransformer from "./ContentTransformer";
-import { useNextSanityImage } from "next-sanity-image";
 import sanityClient from "../utils/sanityClient";
+import { useNextSanityImage } from "next-sanity-image";
 
 const Author = ({
   profileImage,
@@ -19,12 +19,14 @@ const Author = ({
           "h-12 w-12 rounded-full overflow-hidden relative bg-blue-500 ring-2 ring-blue-600"
         }
       >
-        <Image
-          {...imageProps}
-          layout={"fill"}
-          className={"object-cover"}
-          sizes={"48px"}
-        />
+        {imageProps && (
+          <Image
+            {...imageProps}
+            layout={"fill"}
+            className={"object-cover"}
+            sizes={"48px"}
+          />
+        )}
       </div>
       <div className={"flex-grow flex flex-col space-y-1"}>
         <span>
@@ -47,20 +49,24 @@ const Post = ({ title, imageUrl, publishedAt, author, body }: PostType) => {
 
   return (
     <div className={"flex flex-col space-y-8 my-4"}>
-      <div className={"h-96 w-full rounded-xl overflow-hidden relative"}>
-        <Image
-          {...imageProps}
-          layout={"fill"}
-          className={"object-cover"}
-          sizes={"100vw"}
-        />
-      </div>
+      {imageProps && (
+        <div className={"h-96 w-full rounded-xl overflow-hidden relative"}>
+          <Image
+            {...imageProps}
+            layout={"fill"}
+            className={"object-cover"}
+            sizes={"100vw"}
+          />
+        </div>
+      )}
       <h1>{title}</h1>
-      <Author
-        publishedAt={publishedAt}
-        name={author.name}
-        profileImage={author.profileImage}
-      />
+      {publishedAt && author && (
+        <Author
+          publishedAt={publishedAt}
+          name={author.name}
+          profileImage={author.profileImage}
+        />
+      )}
       <hr />
       <ContentTransformer body={body} />
     </div>

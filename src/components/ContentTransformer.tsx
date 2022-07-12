@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useNextSanityImage } from "next-sanity-image";
 import sanityClient from "utils/sanityClient";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { cloneElement } from "react";
 
 const myPortableTextComponents: Partial<PortableTextReactComponents> = {
   types: {
@@ -42,15 +43,27 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
     ),
   },
   block: {
-    h1: ({ children }) => <h2>{children}</h2>,
-    h2: ({ children }) => <h3>{children}</h3>,
-    h3: ({ children }) => <h4>{children}</h4>,
-    h4: ({ children }) => <h5>{children}</h5>,
-    h5: ({ children }) => <h6>{children}</h6>,
+    h1: ({ children }) => <h1 className={"text-5xl my-6"}>{children}</h1>,
+    h2: ({ children }) => <h2 className={"text-3xl my-5"}>{children}</h2>,
+    h3: ({ children }) => (
+      <div className={"flex items-center space-x-4"}>
+        <span className={"w-10 h-0.5 bg-foreground"} />
+        <h3 className={"text-lg my-4 uppercase font-semibold"}>{children}</h3>
+      </div>
+    ),
+    h4: ({ children }) => (
+      <h4 className={"text-base my-3 uppercase font-semibold"}>{children}</h4>
+    ),
+    h5: ({ children }) => (
+      <h5 className={"text-sm my-2 uppercase font-semibold"}>{children}</h5>
+    ),
     blockquote: ({ children }) => (
       <blockquote className="border-l-4 border-gray-300 p-4">
         <i>{children}</i>
       </blockquote>
+    ),
+    normal: ({ children }) => (
+      <p className={"text-xl max-w-prose my-2"}>{children}</p>
     ),
   },
 
@@ -80,6 +93,22 @@ const myPortableTextComponents: Partial<PortableTextReactComponents> = {
       return (
         <Link href={`/posts/${value.slug}`}>
           <a className={"underline font-semibold text-blue-700"}>{children}</a>
+        </Link>
+      );
+    },
+    highlight: ({ children, value }) => {
+      return <span className={"font-bold text-primary"}>{children}</span>;
+    },
+    cta: ({ children, value }) => {
+      return (
+        <Link href={`/${value.slug}`}>
+          <a
+            className={
+              "block font-semibold text-xl px-6 py-3 text-background bg-primary my-8 w-min truncate"
+            }
+          >
+            {children}
+          </a>
         </Link>
       );
     },

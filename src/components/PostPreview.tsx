@@ -2,8 +2,8 @@ import Image from "next/image";
 import format from "date-fns/format";
 import { AuthorPreviewType, PostPreviewType } from "queries";
 import Link from "next/link";
-import { useNextSanityImage } from "next-sanity-image";
 import sanityClient from "utils/sanityClient";
+import { useNextSanityImage } from "next-sanity-image";
 
 const AuthorPreview = ({
   profileImage,
@@ -19,12 +19,14 @@ const AuthorPreview = ({
           "h-10 w-10 rounded-full overflow-hidden relative bg-blue-500 ring-2 ring-blue-600"
         }
       >
-        <Image
-          {...imageProps}
-          layout={"fill"}
-          className={"object-cover"}
-          sizes={"40px"}
-        />
+        {imageProps && (
+          <Image
+            {...imageProps}
+            layout={"fill"}
+            className={"object-cover"}
+            sizes={"40px"}
+          />
+        )}
       </div>
       <div className={"flex-grow flex flex-col space-y-1"}>
         <span className={"text-sm"}>
@@ -62,19 +64,29 @@ const PostPreview = ({
       <div
         className={"h-48 xl:h-96 w-full  rounded-xl overflow-hidden relative"}
       >
-        <Image
-          {...imageProps}
-          layout={"fill"}
-          className={"object-cover"}
-          sizes={"(max-width: 640px) 100vw, 33vw"}
-        />
+        {imageProps && (
+          <Image
+            {...imageProps}
+            layout={"fill"}
+            className={"object-cover"}
+            sizes={"(max-width: 640px) 100vw, 33vw"}
+          />
+        )}
       </div>
       <section className={"p-4 flex flex-col space-y-4 flex-grow"}>
-        <h3 className={"my-1 font-semibold truncate h-24"} title={title}>
-          {title}
-        </h3>
+        {title && (
+          <h3 className={"my-1 font-semibold truncate h-24"} title={title}>
+            {title}
+          </h3>
+        )}
         <hr />
-        <AuthorPreview {...author} publishedAt={publishedAt} />
+        {publishedAt && author && (
+          <AuthorPreview
+            publishedAt={publishedAt}
+            name={author.name}
+            profileImage={author.profileImage}
+          />
+        )}
         <hr />
         <p className={"overflow-hidden flex-grow h-full"}>{summary}</p>
         <hr />

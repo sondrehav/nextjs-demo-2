@@ -4,27 +4,18 @@
 
 @layer components {
     #__next {
-        @apply relative min-h-full flex flex-col flex-grow text-gray-900;
+        @apply relative min-h-full flex flex-col flex-grow;
     }
-
-    h1, .h1 { @apply text-3xl my-8; }
-    h2, .h2 { @apply text-2xl my-6; }
-    h3, .h3 { @apply text-xl my-4; }
-    h4, .h4 { @apply text-lg my-3; }
-    h5, .h5 { @apply text-base my-2 font-bold; }
-    h6, .h6 { @apply text-sm my-2 font-bold; }
-    p { @apply text-base my-3; }
-    label { @apply font-bold text-sm my-2; }
 }
 
 @font-face {
-    font-family: "Nunito";
+    font-family: "JosefinSans";
     font-style: normal;
-    src: local(''), url("../public/fonts/Nunito-VariableFont_wght.ttf") format("truetype");
+    src: local(''), url("../public/fonts/JosefinSans-VariableFont_wght.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: "Nunito";
+    font-family: "JosefinSans";
     font-style: italic;
-    src: local(''), url("../public/fonts/Nunito-Italic-VariableFont_wght.ttf") format("truetype");
+    src: local(''), url("../public/fonts/JosefinSans-Italic-VariableFont_wght.ttf") format("truetype");
 }

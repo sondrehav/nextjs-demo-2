@@ -32,7 +32,10 @@ const SearchPost = ({
       onSubmit={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        onSearch(e.target[0].value);
+        const value = e.currentTarget.value;
+        if (typeof value === "string") {
+          onSearch(value);
+        }
       }}
     >
       <label htmlFor={"input-field"}>Søketekst</label>

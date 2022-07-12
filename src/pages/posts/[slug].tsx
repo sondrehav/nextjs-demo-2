@@ -29,6 +29,8 @@ export const getStaticPaths = async (
 export const getStaticProps = async (
   context: GetStaticPropsContext<StaticPathType>
 ) => {
+  if (!context.params?.slug) throw new Error("No slug in the URL parameters.");
+
   const post = await client.fetch<PostType>(
     `*[_type == "post" && slug.current == "${context.params.slug}"][0]{ ${postPreviewQuery}, ${postBodyQuery} }`
   );
